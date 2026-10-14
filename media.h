@@ -1,5 +1,7 @@
+/*
 #ifndef MEDIA
 #define MEDIA
+*/
 #include<iostream>
 
 using namespace std;
@@ -14,4 +16,4 @@ protected:
   int year;
 };
 
-#endif
+//#endif
