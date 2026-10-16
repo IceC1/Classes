@@ -1,7 +1,5 @@
-/*
 #ifndef MEDIA
 #define MEDIA
-*/
 #include<iostream>
 
 using namespace std;
@@ -9,11 +7,12 @@ using namespace std;
 class Media {
 public:
   Media(char* t, int yr);
-protected:
+  
   virtual char* getTitle()const;
   virtual int getYear()const;
+protected:
   char* title;
   int year;
 };
 
-//#endif
+#endif

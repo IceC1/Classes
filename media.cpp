@@ -8,10 +8,10 @@ Media::Media(char* t, int yr) {
   year = yr;
 }
 
-char* Media::getTitle() {
+char* Media::getTitle()const{
   return title;
 }
 
-int Media::getYear() {
+int Media::getYear()const{
   return year;
 }
