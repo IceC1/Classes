@@ -8,7 +8,7 @@ using namespace std;
 void Add(vector<Media*> &medv) {
   char input[9];
   cout << "What type of media would you like to create? (videogame, music, movie): ";
-    cin.getline(input, 9);
+    cin.getline(input, 10);
     char* title = new char[30];
     char t[30];
     int year = 0;
@@ -29,12 +29,10 @@ void Add(vector<Media*> &medv) {
     cout << "What is this videogames rating?: ";
     cin >> rating;
     
-    Videogame game = new Videogame(title, year, publisher, rating);
+    Videogame* game = new Videogame(title, year, publisher, rating);
 
-    cout << game.getTitle() << endl;
-    cout << game.getYear() << endl;
-    cout << game.getPublisher() << endl;
-    cout << game.getRating() << endl;
+    medv.push_back(game);
+
     }
     else if(!strcmp(input, "music")) {
       
@@ -48,8 +46,10 @@ void Add(vector<Media*> &medv) {
     
 }
 
-void Search(vector<Media*> medv) {
+void Search(vector<Media*> medv, char* title, int year) {
+  for (vector<Media*>::iterator it = medv.begin(); it != medv.end(); it++) {
 
+  }
 }
 
 void Del(vector<Media*> &medv) {
@@ -60,21 +60,38 @@ void Del(vector<Media*> &medv) {
 int main() {
   Media* list[2];
   vector<Media*> medv;
-  char input[6];
-
-  cout << "Enter an input (ADD, SEARCH, DELETE): ";
-  cin.getline(input, 6);
-  if(!strcmp(input, "ADD")) {
+  char cmd[6];
+  char ty;
+  char title[30];
+  int year;
+  bool running = true;
+  while(running) {
+    cout << "Enter an input (ADD, SEARCH, DELETE): ";
+    cin.getline(cmd, 6);
+    if(!strcmp(cmd, "ADD")) {
       Add(medv);
+      cin.ignore();
     }
-    else if(!strcmp(input, "SEARCH")) {
-      Search(medv);
+    else if(!strcmp(cmd, "SEARCH")) {
+      cout << "Would you like to search by title or year? (t/y): ";
+      cin >> ty;
+      if(ty = 't') {
+	cout << "What title would you like to find?: ";
+	cin.getline(title, 30);
+	Search(medv, title, 0);
+      }
+      if(ty = 'y') {
+	cout << "What year would you like to find?: ";
+	cin >> year;
+	Search(medv, NULL, year);
+      }
+      cin.ignore();
     }
-    else if(!strcmp(input, "DELETE")) {
+    else if(!strcmp(cmd, "DELETE")) {
       Del(medv);
     }
     else {
       cout << "Invalid input" << endl;
     }
-      
+  }
 }

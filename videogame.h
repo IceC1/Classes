@@ -5,9 +5,9 @@ using namespace std;
 
 class Videogame : public Media {
  public:
-  Videogame(char* publisher, int rating);
+  Videogame(char* title, int year, char* publisher, int rating);
   char* getPublisher()const;
-  int getYear()const;
+  int getRating()const;
  protected:
   char* publisher;
   int rating;
