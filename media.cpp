@@ -8,6 +8,10 @@ Media::Media(char* t, int yr) {
   year = yr;
 }
 
+void Media::Print()const {
+  
+}
+
 char* Media::getTitle()const{
   return title;
 }

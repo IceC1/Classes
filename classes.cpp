@@ -46,9 +46,33 @@ void Add(vector<Media*> &medv) {
     
 }
 
-void Search(vector<Media*> medv, char* title, int year) {
-  for (vector<Media*>::iterator it = medv.begin(); it != medv.end(); it++) {
+vector<Media*> Search(vector<Media*> medv, char* title) {
+  vector<Media*> matched;
 
+  // Brady told me this.
+  for (Media* m: medv) {
+    if(m->getTitle() == title) {
+      matched.push_back(m);
+    }
+  }
+  return matched;
+}
+
+vector<Media*> Search(vector<Media*> medv, int year) {
+  vector<Media*> matched;
+  
+  for (Media* m: medv) {
+    if(m->getYear() == year) {
+      matched.push_back(m);
+    }
+  }
+
+  return matched;
+}
+
+void Print(vector<Media*> matched) {
+  for(Media* m : matched) {
+    m->Print();
   }
 }
 
@@ -60,14 +84,17 @@ void Del(vector<Media*> &medv) {
 int main() {
   Media* list[2];
   vector<Media*> medv;
-  char cmd[6];
+  vector<Media*> matched;
+  char cmd[7];
   char ty;
   char title[30];
   int year;
   bool running = true;
   while(running) {
+    
     cout << "Enter an input (ADD, SEARCH, DELETE): ";
-    cin.getline(cmd, 6);
+    cin.getline(cmd, 7);
+    cout << "cmd: " << cmd << endl;
     if(!strcmp(cmd, "ADD")) {
       Add(medv);
       cin.ignore();
@@ -75,15 +102,19 @@ int main() {
     else if(!strcmp(cmd, "SEARCH")) {
       cout << "Would you like to search by title or year? (t/y): ";
       cin >> ty;
-      if(ty = 't') {
+      cin.ignore();
+      if(ty == 't') {
 	cout << "What title would you like to find?: ";
 	cin.getline(title, 30);
-	Search(medv, title, 0);
+	matched = Search(medv, title);
+	Print(matched);
       }
-      if(ty = 'y') {
+      if(ty == 'y') {
 	cout << "What year would you like to find?: ";
 	cin >> year;
-	Search(medv, NULL, year);
+	cin.ignore();
+	matched = Search(medv, year);
+	Print(matched);
       }
       cin.ignore();
     }
@@ -92,6 +123,7 @@ int main() {
     }
     else {
       cout << "Invalid input" << endl;
+      cin.clear();
     }
   }
 }

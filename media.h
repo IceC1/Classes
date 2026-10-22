@@ -7,7 +7,7 @@ using namespace std;
 class Media {
 public:
   Media(char* t, int yr);
-  
+  virtual void Print()const;
   virtual char* getTitle()const;
   virtual int getYear()const;
 protected:
