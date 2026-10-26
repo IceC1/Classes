@@ -31,6 +31,7 @@ void Add(vector<Media*> &medv) {
     
     Videogame* game = new Videogame(title, year, publisher, rating);
 
+    cout << game->getTitle();
     medv.push_back(game);
 
     }
@@ -46,38 +47,39 @@ void Add(vector<Media*> &medv) {
     
 }
 
-vector<Media*> Search(vector<Media*> medv, char* title) {
-  vector<Media*> matched;
-
-  // Brady told me this.
-  for (Media* m: medv) {
-    if(m->getTitle() == title) {
+vector<int> Search(vector<Media*> medv, char* title) {
+  vector<int> matched;
+ 
+  for (vector<Media*>::iterator it = medv.begin(); it != medv.end(); it ++) {
+      if(!strcmp(m->getTitle(), title)) {
       matched.push_back(m);
     }
   }
   return matched;
 }
 
-vector<Media*> Search(vector<Media*> medv, int year) {
-  vector<Media*> matched;
+vector<int> Search(vector<Media*> medv, int year) {
+  vector<int> matched;
   
   for (Media* m: medv) {
     if(m->getYear() == year) {
       matched.push_back(m);
     }
   }
-
   return matched;
 }
 
-void Print(vector<Media*> matched) {
+void Print(vector<Media*> medv) {
   for(Media* m : matched) {
     m->Print();
   }
 }
 
 void Del(vector<Media*> &medv) {
-
+  for(Media* m: matched) {
+    m->del();
+    delete m;
+  }
 }
 
 
@@ -104,22 +106,36 @@ int main() {
       cin >> ty;
       cin.ignore();
       if(ty == 't') {
-	cout << "What title would you like to find?: ";
-	cin.getline(title, 30);
+	cout << "What title would you like to search with?: ";
+	cin.getline(title, 30);       
 	matched = Search(medv, title);
 	Print(matched);
       }
-      if(ty == 'y') {
-	cout << "What year would you like to find?: ";
+      else if(ty == 'y') {
+	cout << "What year would you like to search with?: ";
 	cin >> year;
 	cin.ignore();
 	matched = Search(medv, year);
 	Print(matched);
       }
-      cin.ignore();
     }
     else if(!strcmp(cmd, "DELETE")) {
-      Del(medv);
+      cout << "Would you like to delete by title or year? (t/y): ";
+      cin >> ty;
+      cin.ignore();
+      if(ty == 't') {
+	cout << "What title would you like to delete?: ";
+	cin.getline(title, 30);       
+	matched = Search(medv, title);
+	Del(matched);
+      }
+      else if(ty == 'y') {
+	cout << "What year would you like to delete?: ";
+	cin >> year;
+	cin.ignore();
+	matched = Search(medv, year);
+	Del(matched);
+      }
     }
     else {
       cout << "Invalid input" << endl;

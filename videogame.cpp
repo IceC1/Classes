@@ -9,12 +9,19 @@ Videogame::Videogame(char* t, int yr, char* pub, int rat): Media(t, yr) {
     }
 
 void Videogame::Print()const{
-  cout << "Videogame: " << title << ", published: " << year << ", by " << publisher << ", rated: " << rating << endl;
+  cout << "Videogame: " << title << endl << ", by " << publisher << endl << ", published: " << year << endl << ", rated: " << rating << endl;
 }
 
 char* Videogame::getPublisher()const{
   return publisher;
 }
+
+void Videogame::del() {
+  delete[] publisher;
+  publisher = nullptr;
+  Media::del();
+}
+
 int Videogame::getRating()const{
   return rating;
 }

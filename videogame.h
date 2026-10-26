@@ -8,6 +8,7 @@ class Videogame : public Media {
   Videogame(char* title, int year, char* publisher, int rating);
   void Print()const;
   char* getPublisher()const;
+  void del();
   int getRating()const;
  protected:
   char* publisher;
