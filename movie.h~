@@ -1,0 +1,17 @@
+#include<iostream>
+#include"media.h"
+
+using namespace std:
+
+class Movie : public Media {
+ public:
+  Movie(char* title, int year, char* director, int duration, int rating)
+    void Print()const;
+  char* getDirector()const;
+  void del();
+  int getDuration()const;
+  int getRating()const;
+ protected:
+  char* director;
+  int duration;
+  int rating;

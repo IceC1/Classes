@@ -9,7 +9,9 @@ Videogame::Videogame(char* t, int yr, char* pub, int rat): Media(t, yr) {
     }
 
 void Videogame::Print()const{
-  cout << "Videogame: " << title << endl << ", by " << publisher << endl << ", published: " << year << endl << ", rated: " << rating << endl;
+  cout << "Videogame: ";
+  Media::Print();
+  cout << "-publisher: " << publisher << endl << "-rating: " << rating << endl;
 }
 
 char* Videogame::getPublisher()const{

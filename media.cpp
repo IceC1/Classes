@@ -9,7 +9,7 @@ Media::Media(char* t, int yr) {
 }
 
 void Media::Print()const{
-  cout << "hi";  
+  cout << title << endl << "-year: " << year << endl;  
 }
 
 char* Media::getTitle()const{
