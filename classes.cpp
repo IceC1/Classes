@@ -1,3 +1,7 @@
+/* Elijah Chan 11/2/2026
+Stores three different child classes of media in a vector and allows the user to interact with it through add, search, and delete..
+*/
+
 #include<iostream>
 #include<vector>
 #include<cstring>
@@ -7,6 +11,7 @@
 #include"movie.h"
 using namespace std;
 
+//Adds a videogame, music, or movie to the media vector.
 void Add(vector<Media*> &medv) {
   char input[9];
   cout << "What type of media would you like to create? (videogame, music, movie): ";
@@ -75,9 +80,9 @@ void Add(vector<Media*> &medv) {
   else {
     cout << "Invalid input" << endl;
   }
-    
 }
 
+//Searchs through the media vector for matching titles and returns a vector of matching int indices. 
 vector<int> Search(vector<Media*> medv, char* title) {
   vector<int> matched;
  
@@ -89,6 +94,7 @@ vector<int> Search(vector<Media*> medv, char* title) {
   return matched;
 }
 
+//Same as above but overloaded for year instead of title.
 vector<int> Search(vector<Media*> medv, int year) {
   vector<int> matched;
  
@@ -101,19 +107,24 @@ vector<int> Search(vector<Media*> medv, int year) {
  return matched;
 }
 
+//Iterates through the vector of matched ints and runs the media's print function.
 void Print(vector<Media*> medv, vector<int> matched) {
   for(int i : matched) {
     medv[i]->Print();
   }
 }
 
+//Deletes each of the indices from the search function in the media vector.
 void Del(vector<Media*> &medv, vector<int> matched) {
+  int count = 0;
   for(int i: matched) {
-    medv[i]->del();
-    delete medv[i];
-    medv[i] = nullptr;
-    medv.erase(medv.begin() + i);
+    medv[i - count]->del();
+    delete medv[i - count];
+    medv[i - count] = nullptr;
+    medv.erase(medv.begin() + (i - count));
+    count++;
   }
+  cout << "Done" << endl;
 }
 
 
@@ -126,11 +137,12 @@ int main() {
   char title[30];
   int year;
   bool running = true;
+
+  //Running loop.
   while(running) {
-    
     cout << "Enter an input (add, search, delete): ";
     cin.getline(cmd, 7);
-    cout << "cmd: " << cmd << endl;
+    
     if(!strcmp(cmd, "add")) {
       Add(medv);
       cin.ignore();
@@ -173,7 +185,7 @@ int main() {
     }
     else {
       cout << "Invalid input" << endl;
-      cin.clear();
+      cin.ignore();
     }
   }
 }

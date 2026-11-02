@@ -8,15 +8,18 @@ Media::Media(char* t, int yr) {
   year = yr;
 }
 
+//Outputs the stored title and year. 
 void Media::Print()const{
   cout << title << endl << "-year: " << year << endl;  
 }
 
+//Returns the title of the media.
 char* Media::getTitle()const{
   return title;
 }
 
-void Media::del() {
+//Deletes the title
+~Media() {
   delete[] title;
   title = nullptr;
 }
