@@ -3,27 +3,30 @@
 
 using namespace std;
 
+//Constructor
 Videogame::Videogame(char* t, int yr, char* pub, int rat): Media(t, yr) {
   publisher = pub;
   rating = rat;
     }
 
+//Outputs the publisher and rating.
 void Videogame::Print()const{
   cout << "Videogame: ";
   Media::Print();
   cout << "-publisher: " << publisher << endl << "-rating: " << rating << endl;
 }
 
+//Returns the publisher.
 char* Videogame::getPublisher()const{
   return publisher;
 }
 
-void Videogame::del() {
+//Destroys the new char* publisher.
+Videogame::~Videogame() {
   delete[] publisher;
-  publisher = nullptr;
-  Media::del();
 }
 
+//Returns the rating.
 int Videogame::getRating()const{
   return rating;
 }

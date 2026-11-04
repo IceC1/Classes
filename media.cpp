@@ -19,9 +19,8 @@ char* Media::getTitle()const{
 }
 
 //Deletes the title
-~Media() {
+Media::~Media() {
   delete[] title;
-  title = nullptr;
 }
 
 int Media::getYear()const{

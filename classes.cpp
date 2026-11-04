@@ -118,13 +118,11 @@ void Print(vector<Media*> medv, vector<int> matched) {
 void Del(vector<Media*> &medv, vector<int> matched) {
   int count = 0;
   for(int i: matched) {
-    medv[i - count]->del();
     delete medv[i - count];
     medv[i - count] = nullptr;
     medv.erase(medv.begin() + (i - count));
     count++;
   }
-  cout << "Done" << endl;
 }
 
 

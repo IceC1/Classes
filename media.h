@@ -10,7 +10,7 @@ public:
   Media(char* t, int yr);
   virtual void Print()const; //Prints the media's title and year.
   virtual char* getTitle()const; //Returns a char* of the media"s title
-  ~Media(); //Handles the memory deletion of the char* title on the heap.
+  virtual ~Media(); //Handles the memory deletion of the char* title on the heap.
   virtual int getYear()const; //Returns an int of the media's year
 protected:
   char* title;
