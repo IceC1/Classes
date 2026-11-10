@@ -116,12 +116,20 @@ void Print(vector<Media*> medv, vector<int> matched) {
 
 //Deletes each of the indices from the search function in the media vector.
 void Del(vector<Media*> &medv, vector<int> matched) {
+  char del;
   int count = 0;
   for(int i: matched) {
-    delete medv[i - count];
-    medv[i - count] = nullptr;
-    medv.erase(medv.begin() + (i - count));
-    count++;
+    cout << "Would you like to delete: " << endl;
+    medv[i]->Print();
+    cout << "(y/n): ";
+    cin >> del;
+    cin.ignore();
+    if(del == 'y') {
+      delete medv[i - count];
+      medv[i - count] = nullptr;
+      medv.erase(medv.begin() + (i - count));
+      count++;
+    }
   }
 }
 
@@ -138,7 +146,7 @@ int main() {
 
   //Running loop.
   while(running) {
-    cout << "Enter an input (add, search, delete): ";
+    cout << "Enter an input (add, search, delete, quit): ";
     cin.getline(cmd, 7);
     
     if(!strcmp(cmd, "add")) {
@@ -180,6 +188,9 @@ int main() {
 	matched = Search(medv, year);
 	Del(medv, matched);
       }
+    }
+    else if(!strcmp(cmd, "quit")) {
+      running = false;
     }
     else {
       cout << "Invalid input" << endl;
